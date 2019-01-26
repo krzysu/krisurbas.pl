@@ -1,0 +1,7 @@
+@import '../stylesheets/mixins';
+
+.index-page {
+  &__author-item {
+    @include author-item-reversed;
+  }
+}

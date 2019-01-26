@@ -1,9 +1,11 @@
 ---
+path: "/social-by-design-in-examples/"
 title: Social by design in examples
 date: "2013-02-20"
-layout: post
-path: "/social-by-design-in-examples/"
+image: "./promo.jpg"
 lang: en
+published: true
+seo: ''
 ---
 
 I will tell you about *social by design* based on my ideas for improving my company's website. Unfortunately all my ideas were dismissed because of lack of time and understanding. I don't like my time to be wasted so maybe some of you, dear readers, will be able to take advantage of my suggestions.

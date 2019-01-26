@@ -1,32 +1,27 @@
-import React from 'react'
-import { graphql } from 'gatsby'
+import React from "react";
+import Layout from "src/components/Layout";
+import Button from "src/components/Button/Button";
+import AuthorItem from "src/components/AuthorItem/AuthorItem";
 
-import Layout from '../components/Layout'
-import SEO from '../components/seo'
+const Page404 = ({ location }) => {
+  return (
+    <Layout location={location}>
+      <div className="wrapper">
+        <div
+          style={{
+            padding: "9em 0 12em",
+            textAlign: "center"
+          }}
+        >
+          <h1>page not found</h1>
+          <Button href="/">back to home</Button>
+        </div>
+        <div style={{ paddingBottom: "1.5em" }}>
+          <AuthorItem />
+        </div>
+      </div>
+    </Layout>
+  );
+};
 
-class NotFoundPage extends React.Component {
-  render() {
-    const { data } = this.props
-    const siteTitle = data.site.siteMetadata.title
-
-    return (
-      <Layout location={this.props.location} title={siteTitle}>
-        <SEO title="404: Not Found" />
-        <h1>Not Found</h1>
-        <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
-      </Layout>
-    )
-  }
-}
-
-export default NotFoundPage
-
-export const pageQuery = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-  }
-`
+export default Page404;

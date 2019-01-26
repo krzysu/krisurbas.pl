@@ -1,10 +1,11 @@
 ---
+path: "/how-to-organize-teams-to-get-the-best-out-of-them/"
 title: How to organize teams to get the best out of them
 date: "2018-03-21"
-layout: post
-path: "/how-to-organize-teams-to-get-the-best-out-of-them/"
+image: "./promo.jpg"
 lang: en
-imageUrl: "/how-to-organize-teams-to-get-the-best-out-of-them/promo.jpg"
+published: true
+seo: ''
 ---
 
 Today I would like to share my thoughts on how different companies structure their departments and teams. I will also show how to improve communication, collaboration, commitment and pride of work done. It might require a reorganization of the structure, loosen up your micromanagement aspirations and give your people more independence and trust in their skills.

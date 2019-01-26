@@ -1,9 +1,11 @@
 ---
+path: "/short-story-about-looking-for-new-place-to-live/"
 title: Short story about looking for a new place to live
 date: "2012-10-10"
-layout: post
-path: "/short-story-about-looking-for-new-place-to-live/"
+image: "./promo.jpg"
 lang: en
+published: true
+seo: ''
 ---
 
 I don't like writing a lot about technical things. If you are a smart developer, you will find a lot resources with solutions for your everyday tech problems. And I don't feel like I want to build another one. Instead today, I would like to share my knowledge, experiences and lessons learned from just trying not be bored in my life. This is not so common to read about. **This post is about why I moved to Berlin from Wroclaw and why I am not attending a scuba diving course on Malta**.

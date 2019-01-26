@@ -1,0 +1,24 @@
+@import '../../stylesheets/vars';
+
+.post-item {
+  text-decoration: none;
+  display: block;
+  padding: 0.8em;
+  margin: -0.8em;
+
+  &:hover {
+    background-color: $color-reverse-alt;
+  }
+
+  &__image {
+    margin-bottom: 1em;
+  }
+
+  &__headline {
+    margin-bottom: 0.5625em;
+  }
+
+  &__body {
+    margin: 0;
+  }
+}

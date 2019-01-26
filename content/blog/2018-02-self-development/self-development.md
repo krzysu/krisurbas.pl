@@ -1,10 +1,11 @@
 ---
+path: "/average-programmer-to-happy-software-developer/"
 title: From average programmer to happy software engineer
 date: "2018-02-17"
-layout: post
-path: "/average-programmer-to-happy-software-developer/"
+image: "./self-development.jpg"
 lang: en
-imageUrl: "/average-programmer-to-happy-software-developer/self-development.jpg"
+published: true
+seo: ''
 ---
 
 > A few words about self-development.

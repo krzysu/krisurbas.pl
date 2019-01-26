@@ -1,64 +1,85 @@
-const path = require(`path`)
-const { createFilePath } = require(`gatsby-source-filesystem`)
+const Promise = require("bluebird");
+const path = require("path");
+const get = require("lodash/get");
 
 exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions
+  const { createPage } = actions;
 
-  const blogPost = path.resolve(`./src/templates/blog-post.js`)
-  return graphql(
-    `
-      {
-        allMarkdownRemark(
-          sort: { fields: [frontmatter___date], order: DESC }
-          limit: 1000
-        ) {
-          edges {
-            node {
-              fields {
-                slug
-              }
-              frontmatter {
-                title
+  return new Promise((resolve, reject) => {
+    resolve(
+      graphql(
+        `
+          {
+            allMarkdownRemark(
+              sort: { fields: [frontmatter___date], order: DESC }
+              limit: 1000
+            ) {
+              edges {
+                node {
+                  excerpt
+                  frontmatter {
+                    path
+                    title
+                    date(formatString: "MMMM Do, YYYY")
+                    image {
+                      childImageSharp {
+                        fluid(maxWidth: 800) {
+                          base64
+                          aspectRatio
+                          src
+                          srcSet
+                          sizes
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
+        `
+      ).then(result => {
+        if (result.errors) {
+          console.log(result.errors);
+          reject(result.errors);
         }
-      }
-    `
-  ).then(result => {
-    if (result.errors) {
-      throw result.errors
-    }
 
-    // Create blog posts pages.
-    const posts = result.data.allMarkdownRemark.edges
+        const posts = result.data.allMarkdownRemark.edges;
 
-    posts.forEach((post, index) => {
-      const previous = index === posts.length - 1 ? null : posts[index + 1].node
-      const next = index === 0 ? null : posts[index - 1].node
-
-      createPage({
-        path: post.node.fields.slug,
-        component: blogPost,
-        context: {
-          slug: post.node.fields.slug,
-          previous,
-          next,
-        },
+        createPostPages(createPage, posts);
       })
-    })
-  })
-}
+    );
+  });
+};
 
-exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions
+const createPostPages = (createPage, posts) => {
+  const postTemplate = path.resolve("./src/templates/post.js");
 
-  if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
-    createNodeField({
-      name: `slug`,
-      node,
-      value,
-    })
-  }
-}
+  posts.forEach((post, index) => {
+    const readNext = getReadNextPosts(posts, post);
+    createPage({
+      path: post.node.frontmatter.path,
+      component: postTemplate,
+      context: {
+        readNext
+      }
+    });
+  });
+};
+
+const getReadNextPosts = (posts, currentPost) => {
+  return posts
+    .filter(post => post !== currentPost)
+    .slice(0, 3)
+    .map(getPostItemFlatData);
+};
+
+const getPostItemFlatData = edge => {
+  return {
+    path: edge.node.frontmatter.path,
+    date: edge.node.frontmatter.date,
+    title: edge.node.frontmatter.title,
+    excerpt: edge.node.excerpt,
+    imageSizes: get(edge, "node.frontmatter.image.childImageSharp.fluid", {})
+  };
+};

@@ -1,0 +1,11 @@
+@import '../stylesheets/mixins';
+
+.contact-page {
+  &__content {
+    margin-bottom: 3em;
+  }
+
+  &__author-item {
+    @include author-item-reversed;
+  }
+}

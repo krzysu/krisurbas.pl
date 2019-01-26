@@ -1,9 +1,11 @@
 ---
+path: "/sokoban-player-play-any-level-you-want/"
 title: "Sokoban Player: play any level you want"
 date: "2018-02-04"
-layout: post
-path: "/sokoban-player-play-any-level-you-want/"
+image: "./promo.jpg"
 lang: en
+published: true
+seo: ''
 ---
 
 I would like to present you my side project I've been working on for the past few months. I called it Sokoban Player because the idea is that you can play any level you want. You just need to insert it in the [Sokoban Level Format](https://github.com/krzysu/elm-sokoban-player/wiki/Sokoban-Level-Format).

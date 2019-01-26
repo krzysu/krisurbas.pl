@@ -1,9 +1,11 @@
 ---
+path: "/you-dont-need-another-software-engineer/"
 title: "You don't need another software engineer"
 date: "2018-02-13"
-layout: post
-path: "/you-dont-need-another-software-engineer/"
+image: "./promo.jpg"
 lang: en
+published: true
+seo: ''
 ---
 
 > A note on recruitment in today's IT companies.

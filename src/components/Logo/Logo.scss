@@ -1,0 +1,53 @@
+@import '../../stylesheets/vars';
+
+$radius: 12em;
+$padding: 0.25em;
+$border-inner: 0.25em;
+$border-middle: 0.8em;
+$border-outer: 0.25em;
+$default-color: $color-base;
+$active-color: $color-extra;
+
+.logo {
+  text-decoration: none;
+  color: $default-color;
+
+  &:hover {
+    color: $active-color;
+  }
+
+  &__circle-outer {
+    width: $radius + 2 * $border-inner + 2 * $border-middle + 2 * $padding;
+    height: $radius + 2 * $border-inner + 2 * $border-middle + 2 * $padding;
+    padding: $padding;
+    border: $border-outer dotted $default-color;
+    border-radius: 100%;
+  }
+
+  &__circle-middle {
+    width: $radius + 2 * $border-inner;
+    height: $radius + 2 * $border-inner;
+    padding: $padding;
+    border: $border-middle solid $default-color;
+    border-radius: 100%;
+  }
+
+  &__circle-inner {
+    width: $radius;
+    height: $radius;
+    border: $border-inner solid $default-color;
+    border-radius: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__copy {
+    text-align: center;
+    font-family: 'Yellowtail', 'Lato', Arial, serif;
+    font-size: 3.3em;
+    line-height: 1;
+    transform: rotate(-10deg);
+  }
+}

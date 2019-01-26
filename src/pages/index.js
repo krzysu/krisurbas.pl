@@ -1,69 +1,80 @@
-import React from 'react'
-import { Link, graphql } from 'gatsby'
+import React from "react";
+import PropTypes from "prop-types";
+import { graphql } from "gatsby";
+import Img from "gatsby-image";
+import BEMHelper from "react-bem-helper";
+import get from "lodash/get";
+import { getPostItemFlatData } from "src/helpers";
+import Layout from "src/components/Layout";
+import PostList from "src/components/PostList/PostList";
+import AuthorItem from "src/components/AuthorItem/AuthorItem";
+import "./index.scss";
 
-import Bio from '../components/Bio'
-import Layout from '../components/Layout'
-import SEO from '../components/seo'
-import { rhythm } from '../utils/typography'
+const bem = new BEMHelper("index-page");
 
-class BlogIndex extends React.Component {
-  render() {
-    const { data } = this.props
-    const siteTitle = data.site.siteMetadata.title
-    const posts = data.allMarkdownRemark.edges
+const IndexPage = ({ location, data }) => {
+  const posts = get(data, "allMarkdownRemark.edges", []);
+  const coverImageSizes = get(data, "coverImage.fluid");
 
-    return (
-      <Layout location={this.props.location} title={siteTitle}>
-        <SEO
-          title="All posts"
-          keywords={[`blog`, `gatsby`, `javascript`, `react`]}
-        />
-        <Bio />
-        {posts.map(({ node }) => {
-          const title = node.frontmatter.title || node.fields.slug
-          return (
-            <div key={node.fields.slug}>
-              <h3
-                style={{
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
-                <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                  {title}
-                </Link>
-              </h3>
-              <small>{node.frontmatter.date}</small>
-              <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
-            </div>
-          )
-        })}
-      </Layout>
-    )
-  }
-}
+  const flatPosts = posts.map(getPostItemFlatData);
 
-export default BlogIndex
+  return (
+    <Layout location={location}>
+      <div {...bem()}>
+        {coverImageSizes && <Img fluid={coverImageSizes} />}
+
+        <div className="wrapper wrapper--wide">
+          <div className="page__header">
+            <h2 className="page__title">Blog</h2>
+          </div>
+
+          <PostList flatPosts={flatPosts} />
+        </div>
+
+        <div {...bem("author-item")}>
+          <div className="wrapper">
+            <AuthorItem />
+          </div>
+        </div>
+      </div>
+    </Layout>
+  );
+};
+
+IndexPage.propTypes = {
+  data: PropTypes.object
+};
+
+export default IndexPage;
 
 export const pageQuery = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
+  {
+    coverImage: imageSharp(fluid: { originalName: { regex: "/cover.jpg/" } }) {
+      fluid(maxWidth: 1600, maxHeight: 400) {
+        ...GatsbyImageSharpFluid
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { published: { eq: true } } }
+    ) {
       edges {
         node {
           excerpt
-          fields {
-            slug
-          }
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
+            date(formatString: "MMMM Do, YYYY")
             title
+            path
+            image {
+              childImageSharp {
+                fluid(maxWidth: 800) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
           }
         }
       }
     }
   }
-`
+`;

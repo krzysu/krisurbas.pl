@@ -1,9 +1,11 @@
 ---
+path: "/things-i-learned-by-doing-in-2018/"
 title: Things I learned by doing in 2018
 date: "2019-01-18"
-layout: post
-path: "/things-i-learned-by-doing-in-2018/"
+image: "./promo.jpg"
 lang: en
+published: true
+seo: ''
 ---
 
 > My first year as a freelancer

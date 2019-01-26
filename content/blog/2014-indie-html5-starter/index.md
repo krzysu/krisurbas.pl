@@ -1,9 +1,11 @@
 ---
+path: "/indie-html5-game-development/"
 title: Indie HTML5 game development
 date: "2014-01-06"
-layout: post
-path: "/indie-html5-game-development/"
+image: "./promo.jpg"
 lang: en
+published: true
+seo: ''
 ---
 
 > From my experience and knowledge I gathered in the last few months.
